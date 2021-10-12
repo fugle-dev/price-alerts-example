@@ -1,0 +1,18 @@
+{
+  "alerts": [
+    {
+      "symbol": "2884",
+      "name": "玉山金",
+      "type": "price",
+      "comparator": ">=",
+      "target": 25
+    },
+    {
+      "symbol": "2330",
+      "name": "台積電",
+      "type": "price",
+      "comparator": "<=",
+      "target": 600
+    }
+  ]
+}

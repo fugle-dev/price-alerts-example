@@ -1,0 +1,20 @@
+{
+  "name": "price-alerts-example",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Stock price alerts implementation using Fugle Realtime API and Line Notify",
+  "main": "app.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node app.js",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@fugle/realtime": "^0.3.2",
+    "dotenv": "^10.0.0",
+    "line-notify-sdk": "^1.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0"
+  }
+}
