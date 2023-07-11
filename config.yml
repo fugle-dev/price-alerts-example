@@ -1,0 +1,8 @@
+---
+alerts:
+  2330:
+    title: 到價提醒
+    message: 台積電突破600元
+    type: price
+    comparator: ">"
+    target: 600

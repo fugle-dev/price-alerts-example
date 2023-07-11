@@ -1,6 +1,6 @@
 {
   "name": "price-alerts-example",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "description": "Stock price alerts implementation using Fugle Realtime API and Line Notify",
   "main": "app.js",
@@ -10,9 +10,12 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@fugle/realtime": "^0.3.2",
+    "@fugle/marketdata": "^1.0.3",
     "dotenv": "^10.0.0",
-    "line-notify-sdk": "^1.2.0"
+    "js-yaml": "^4.1.0",
+    "line-notify-sdk": "^1.2.0",
+    "luxon": "^3.3.0",
+    "numeral": "^2.0.6"
   },
   "devDependencies": {
     "eslint": "^8.0.0"
