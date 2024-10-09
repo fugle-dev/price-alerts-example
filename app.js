@@ -4,14 +4,15 @@
 require('dotenv').config();
 const fs = require('fs');
 const yaml = require('js-yaml');
-const notifySDK = require('line-notify-sdk');
+const MessagingApiClient = require('@line/bot-sdk').messagingApi.MessagingApiClient;
 const numeral = require('numeral');
 const { DateTime } = require('luxon');
 const { WebSocketClient } = require('@fugle/marketdata');
 
 // 獲取環境變數設定
 const apiKey = process.env.FUGLE_MARKETDATA_API_KEY;
-const token = process.env.LINE_NOTIFY_ACCESS_TOKEN;
+const channelAccessToken = process.env.LINE_CHANNEL_ACCESS_TOKEN;
+const userId = process.env.LINE_USER_ID;
 
 // 主要邏輯執行區塊
 async function main() {
@@ -20,8 +21,8 @@ async function main() {
     const config = yaml.load(fs.readFileSync('./config.yml', 'utf8'));
     const alerts = new Map(Object.entries(config.alerts));
 
-    // 建立 Line Notify 服務和 Fugle Market Data API 的 WebSocket 連接
-    const notify = new notifySDK();
+    // 建立 Line Messaging API Client 和 Fugle Market Data API 的 WebSocket 連接
+    const messagingApiClient = new MessagingApiClient({ channelAccessToken });
     const client = new WebSocketClient({ apiKey });
     const stock = client.stock;
 
@@ -73,7 +74,7 @@ async function main() {
         .toFormat('yyyy/MM/dd HH:mm:ss');
 
       // 建構通知內容
-      const message = [''].concat([
+      const message = [].concat([
         `<<${alert.title}>>`,
         `${alert.message}`,
         `---`,
@@ -83,10 +84,11 @@ async function main() {
         `時間: ${time}`,
       ]).join('\n');
 
-      // 發送 Line Notify 通知
-      notify.notify(token, message)
-        .then(() => console.log(message))
-        .catch((e) => console.log(e));
+      // 發送 Line Message
+      messagingApiClient.pushMessage({
+        to: userId,
+        messages: [{ type: 'text', text: message }],
+      });
 
       // 從監控清單中刪除該股票
       alerts.delete(symbol);

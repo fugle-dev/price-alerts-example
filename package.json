@@ -11,9 +11,9 @@
   },
   "dependencies": {
     "@fugle/marketdata": "^1.0.3",
+    "@line/bot-sdk": "^9.4.1",
     "dotenv": "^10.0.0",
     "js-yaml": "^4.1.0",
-    "line-notify-sdk": "^1.2.0",
     "luxon": "^3.3.0",
     "numeral": "^2.0.6"
   },
